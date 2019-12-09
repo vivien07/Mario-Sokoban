@@ -10,6 +10,8 @@
 		C343F219239C217100F3E623 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C343F218239C217100F3E623 /* main.c */; };
 		C343F221239C21C600F3E623 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C343F220239C21C600F3E623 /* SDL2.framework */; };
 		C343F223239C221E00F3E623 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C343F222239C221D00F3E623 /* SDL2_image.framework */; };
+		C343F232239E642A00F3E623 /* jeu.c in Sources */ = {isa = PBXBuildFile; fileRef = C343F230239E642A00F3E623 /* jeu.c */; };
+		C343F237239E698F00F3E623 /* fichiers.c in Sources */ = {isa = PBXBuildFile; fileRef = C343F236239E698E00F3E623 /* fichiers.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +40,12 @@
 		C343F22C239D463100F3E623 /* caisse_ok.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = caisse_ok.jpg; sourceTree = "<group>"; };
 		C343F22D239D463100F3E623 /* mario_droite.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mario_droite.gif; sourceTree = "<group>"; };
 		C343F22E239D463100F3E623 /* mario_gauche.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mario_gauche.gif; sourceTree = "<group>"; };
+		C343F22F239E5DC700F3E623 /* constantes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constantes.h; sourceTree = "<group>"; };
+		C343F230239E642A00F3E623 /* jeu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = jeu.c; sourceTree = "<group>"; };
+		C343F231239E642A00F3E623 /* jeu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jeu.h; sourceTree = "<group>"; };
+		C343F234239E68F400F3E623 /* fichiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fichiers.h; sourceTree = "<group>"; };
+		C343F235239E697D00F3E623 /* niveaux.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = niveaux.lvl; sourceTree = "<group>"; };
+		C343F236239E698E00F3E623 /* fichiers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fichiers.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,16 +81,14 @@
 		C343F217239C217100F3E623 /* jeu */ = {
 			isa = PBXGroup;
 			children = (
+				C343F22F239E5DC700F3E623 /* constantes.h */,
 				C343F218239C217100F3E623 /* main.c */,
-				C343F22C239D463100F3E623 /* caisse_ok.jpg */,
-				C343F226239D463000F3E623 /* caisse.jpg */,
-				C343F228239D463000F3E623 /* mario_bas.gif */,
-				C343F22D239D463100F3E623 /* mario_droite.gif */,
-				C343F22E239D463100F3E623 /* mario_gauche.gif */,
-				C343F227239D463000F3E623 /* mario_haut.gif */,
-				C343F229239D463000F3E623 /* menu.jpg */,
-				C343F22B239D463100F3E623 /* mur.jpg */,
-				C343F22A239D463000F3E623 /* objectif.png */,
+				C343F230239E642A00F3E623 /* jeu.c */,
+				C343F231239E642A00F3E623 /* jeu.h */,
+				C343F236239E698E00F3E623 /* fichiers.c */,
+				C343F234239E68F400F3E623 /* fichiers.h */,
+				C343F235239E697D00F3E623 /* niveaux.lvl */,
+				C343F233239E643E00F3E623 /* images */,
 			);
 			path = jeu;
 			sourceTree = "<group>";
@@ -94,6 +100,22 @@
 				C343F220239C21C600F3E623 /* SDL2.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C343F233239E643E00F3E623 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				C343F22C239D463100F3E623 /* caisse_ok.jpg */,
+				C343F226239D463000F3E623 /* caisse.jpg */,
+				C343F228239D463000F3E623 /* mario_bas.gif */,
+				C343F22D239D463100F3E623 /* mario_droite.gif */,
+				C343F22E239D463100F3E623 /* mario_gauche.gif */,
+				C343F227239D463000F3E623 /* mario_haut.gif */,
+				C343F229239D463000F3E623 /* menu.jpg */,
+				C343F22B239D463100F3E623 /* mur.jpg */,
+				C343F22A239D463000F3E623 /* objectif.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +174,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C343F232239E642A00F3E623 /* jeu.c in Sources */,
 				C343F219239C217100F3E623 /* main.c in Sources */,
+				C343F237239E698F00F3E623 /* fichiers.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
