@@ -8,7 +8,6 @@
 
 void jouer(SDL_Surface* ecran, SDL_Window* window) {
 	
-	//printf("jeu OK\n");
 	
 	SDL_Surface *mario[4] = {NULL}; // 4 surfaces pour chaque direction de mario(bas,haut, gauche, droite)
 	SDL_Surface *mur = NULL, *caisse = NULL, *caisseOK = NULL, *objectif = NULL, *marioActuel = NULL;
@@ -59,19 +58,19 @@ void jouer(SDL_Surface* ecran, SDL_Window* window) {
 						break;
 					case SDLK_UP:
 						marioActuel = mario[HAUT];
-						//deplacerJoueur(carte, &positionJoueur, HAUT);
+						deplacerJoueur(carte, &positionJoueur, HAUT);
 						break;
 					case SDLK_DOWN:
 						marioActuel = mario[BAS];
-						//deplacerJoueur(carte, &positionJoueur, BAS);
+						deplacerJoueur(carte, &positionJoueur, BAS);
 						break;
 					case SDLK_RIGHT:
 						marioActuel = mario[DROITE];
-						//deplacerJoueur(carte, &positionJoueur, DROITE);
+						deplacerJoueur(carte, &positionJoueur, DROITE);
 						break;
 					case SDLK_LEFT:
 						marioActuel = mario[GAUCHE];
-						//deplacerJoueur(carte, &positionJoueur, GAUCHE);
+						deplacerJoueur(carte, &positionJoueur, GAUCHE);
 						break;
 				}
 				break;
@@ -127,8 +126,80 @@ void jouer(SDL_Surface* ecran, SDL_Window* window) {
 }
 
 
-void deplacerJoueur(int carte[][NB_BLOCS_HAUTEUR], SDL_Rect *pos, int direction) {
+void deplacerJoueur(int carte[NB_BLOCS_LARGEUR][NB_BLOCS_HAUTEUR], SDL_Rect *pos, int direction) {
 	
+	switch (direction) {
+		case HAUT:
+			//on liste les cas de collisions
+			if ( pos->y - 1 < 0 || carte[pos->x][pos->y - 1] == MUR ||
+				( (carte[pos->x][pos->y - 1] == CAISSE || carte[pos->x][pos->y - 1] == CAISSE_OK) &&
+				 (pos->y - 2 < 0 || carte[pos->x][pos->y - 2] == MUR || carte[pos->x][pos->y - 2] == CAISSE || carte[pos->x][pos->y - 2] == CAISSE_OK)) ) {
+					break;
+				} else {
+					//déplacement autorisé
+					deplacerCaisse(&carte[pos->x][pos->y - 1], &carte[pos->x][pos->y - 2]);
+					pos->y--;
+					break;
+				}
+		case GAUCHE:
+			
+			if ( pos->x - 1 < 0 || carte[pos->x - 1][pos->y] == MUR ||
+				( (carte[pos->x - 1][pos->y] == CAISSE || carte[pos->x - 1][pos->y] == CAISSE_OK) &&
+				 (pos->x - 2 < 0 || carte[pos->x - 2][pos->y] == MUR || carte[pos->x - 2][pos->y] == CAISSE || carte[pos->x - 2][pos->y] == CAISSE_OK)) ) {
+					break;
+				} else {
+					deplacerCaisse(&carte[pos->x - 1][pos->y], &carte[pos->x - 2][pos->y]);
+					pos->x--;
+					break;
+				}
+		case BAS:
+			
+			if ( pos->y + 1 >= NB_BLOCS_HAUTEUR || carte[pos->x][pos->y + 1] == MUR ||
+				( (carte[pos->x][pos->y + 1] == CAISSE || carte[pos->x][pos->y + 1] == CAISSE_OK) &&
+				 (pos->y + 2 >= NB_BLOCS_HAUTEUR || carte[pos->x][pos->y + 2] == MUR || carte[pos->x][pos->y + 2] == CAISSE || carte[pos->x][pos->y + 2] == CAISSE_OK)) ) {
+					break;
+				} else {
+					deplacerCaisse(&carte[pos->x][pos->y + 1], &carte[pos->x][pos->y + 2]);
+					pos->y++;
+					break;
+				}
+		case DROITE:
+			
+			if ( pos->x + 1 >= NB_BLOCS_LARGEUR || carte[pos->x + 1][pos->y] == MUR ||
+				( (carte[pos->x + 1][pos->y] == CAISSE || carte[pos->x + 1][pos->y] == CAISSE_OK) &&
+				 (pos->x + 2 >= NB_BLOCS_LARGEUR || carte[pos->x + 2][pos->y] == MUR || carte[pos->x + 2][pos->y] == CAISSE || carte[pos->x + 2][pos->y] == CAISSE_OK)) ) {
+					break;
+				} else {
+					deplacerCaisse(&carte[pos->x + 1][pos->y], &carte[pos->x + 2][pos->y]);
+					pos->x++;
+					break;
+				}
+			
+		default:
+			break;
+	}
+	
+	
+	
+	
+	
+}
+
+
+void deplacerCaisse(int *premiereCase, int *secondeCase) {
+	
+	if (*premiereCase == CAISSE || *premiereCase == CAISSE_OK) {
+		//on pousse une caisse sur un objectif
+		if (*secondeCase == OBJECTIF)
+			*secondeCase = CAISSE_OK;
+		else
+			*secondeCase = CAISSE;
+		//on pousse une caisse qui est déjà sur un objectif
+		if (*premiereCase == CAISSE_OK)
+			*premiereCase = OBJECTIF;
+		else
+			*premiereCase = VIDE;
+	}
 	
 	
 	
