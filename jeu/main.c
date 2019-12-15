@@ -5,6 +5,7 @@
 #include "constantes.h"
 #include "jeu.h"
 
+
 int main(int argc, char* args[]) {
 	
 	SDL_Window* window = NULL;
@@ -47,9 +48,6 @@ int main(int argc, char* args[]) {
 								break;
 							case SDLK_KP_1: // Demande à jouer
 								jouer(screen, window);
-								break;
-							case SDLK_KP_2: // Demande l'éditeur de niveaux
-								//editeur(screen);
 								break;
 						}
 						break;

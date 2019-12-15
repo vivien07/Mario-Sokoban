@@ -5,6 +5,6 @@
 
 	void jouer(SDL_Surface* ecran, SDL_Window* window);
 	void deplacerJoueur(int carte[][NB_BLOCS_HAUTEUR], SDL_Rect *pos, int direction);
-void deplacerCaisse(int *premiereCase, int *secondeCase);
+	void deplacerCaisse(int *premiereCase, int *secondeCase);
 
 #endif

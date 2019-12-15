@@ -13,8 +13,9 @@ void jouer(SDL_Surface* ecran, SDL_Window* window) {
 	SDL_Surface *mur = NULL, *caisse = NULL, *caisseOK = NULL, *objectif = NULL, *marioActuel = NULL;
 	SDL_Rect position, positionJoueur;
 	SDL_Event event;
-	int continuer = 1, objectifsRestants = 0;//booléens valant vrai et faux
-	int carte[NB_BLOCS_LARGEUR][NB_BLOCS_HAUTEUR] = {0};
+	int continuer = 1, objectifsRestants = 1;//booléens valant vrai et faux
+	int level = 1;
+	int carte[NB_BLOCS_LARGEUR][NB_BLOCS_HAUTEUR] = {0};//grille de 12 * 12 cases
 	
 	// Chargement des sprites
 	mur = IMG_Load("mur.jpg");
@@ -28,7 +29,7 @@ void jouer(SDL_Surface* ecran, SDL_Window* window) {
 	marioActuel = mario[BAS]; // orientation de Mario au départ
 	
 	// Chargement du niveau
-	if (!chargerNiveau(carte)) {
+	if (!chargerNiveau(carte, level)) {
 		printf("Level can't be loaded\n");
 		exit(EXIT_FAILURE);
 	}
@@ -56,6 +57,18 @@ void jouer(SDL_Surface* ecran, SDL_Window* window) {
 					case SDLK_ESCAPE:
 						continuer = 0;
 						break;
+					case SDLK_r:
+						chargerNiveau(carte, level);
+						for (int i = 0 ; i < NB_BLOCS_LARGEUR ; i++) {
+							for (int j = 0 ; j < NB_BLOCS_HAUTEUR ; j++) {
+								if (carte[i][j] == MARIO) {
+									positionJoueur.x = i;
+									positionJoueur.y = j;
+									carte[i][j] = VIDE;
+								}
+							}
+						}
+						break;
 					case SDLK_UP:
 						marioActuel = mario[HAUT];
 						deplacerJoueur(carte, &positionJoueur, HAUT);
@@ -76,7 +89,7 @@ void jouer(SDL_Surface* ecran, SDL_Window* window) {
 				break;
 		}
 		SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255)); // Effacement de l'écran
-		
+		objectifsRestants = 0;
 		// Placement des objets à l'écran
 		for (int i = 0; i < NB_BLOCS_LARGEUR; i++) {
 			
@@ -103,8 +116,20 @@ void jouer(SDL_Surface* ecran, SDL_Window* window) {
 		}
 		
 		// Si on n'a trouvé aucun objectif sur la carte, c'est qu'on a gagné
-		if (!objectifsRestants)
-			continuer = 0;
+		if (!objectifsRestants) {
+			level ++;
+			chargerNiveau(carte, level);
+			objectifsRestants = 1;
+			for (int i = 0 ; i < NB_BLOCS_LARGEUR ; i++) {
+				for (int j = 0 ; j < NB_BLOCS_HAUTEUR ; j++) {
+					if (carte[i][j] == MARIO) {
+						positionJoueur.x = i;
+						positionJoueur.y = j;
+						carte[i][j] = VIDE;
+					}
+				}
+			}
+		}
 		// On place le joueur à la bonne position
 		position.x = positionJoueur.x * TAILLE_BLOC;
 		position.y = positionJoueur.y * TAILLE_BLOC;

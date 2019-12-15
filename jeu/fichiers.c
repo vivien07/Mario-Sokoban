@@ -7,15 +7,22 @@
 #include "fichiers.h"
 
 
-int chargerNiveau(int niveau[][NB_BLOCS_HAUTEUR]) {
+int chargerNiveau(int niveau[][NB_BLOCS_HAUTEUR], int level) {
 	
     FILE* fichier = NULL;
     char ligneFichier[NB_BLOCS_LARGEUR * NB_BLOCS_HAUTEUR + 1] = {0};//caractère de fin de chaîne
-
+	int numeroLigne = 1;
+	char caractere = ' ';
     fichier = fopen("niveaux.lvl", "r");
     if (fichier == NULL) //test de l'ouverture
         return 0;
 
+	rewind(fichier);
+	while (numeroLigne < level) {
+		caractere = fgetc(fichier);
+		if (caractere == '\n')
+			numeroLigne++;
+	}
     fgets(ligneFichier, NB_BLOCS_LARGEUR * NB_BLOCS_HAUTEUR + 1, fichier);
 
     for (int i = 0 ; i < NB_BLOCS_HAUTEUR ; i++) { //lignes
@@ -42,28 +49,11 @@ int chargerNiveau(int niveau[][NB_BLOCS_HAUTEUR]) {
         }
 		
     }
+	
     fclose(fichier);
     return 1;
 	
 }
 
 
-int sauvegarderNiveau(int niveau[][NB_BLOCS_HAUTEUR]) {
-	
-    FILE* fichier = NULL;
-	
-    fichier = fopen("niveaux.lvl", "w");
-    if (fichier == NULL)
-        return 0;
 
-    for (int i = 0 ; i < NB_BLOCS_LARGEUR ; i++) {
-		
-        for (int j = 0 ; j < NB_BLOCS_HAUTEUR ; j++) {
-            fprintf(fichier, "%d", niveau[j][i]);
-        }
-		
-    }
-    fclose(fichier);
-    return 1;
-	
-}

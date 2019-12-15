@@ -44,8 +44,10 @@
 		C343F230239E642A00F3E623 /* jeu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = jeu.c; sourceTree = "<group>"; };
 		C343F231239E642A00F3E623 /* jeu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jeu.h; sourceTree = "<group>"; };
 		C343F234239E68F400F3E623 /* fichiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fichiers.h; sourceTree = "<group>"; };
-		C343F235239E697D00F3E623 /* niveaux.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = niveaux.lvl; sourceTree = "<group>"; };
 		C343F236239E698E00F3E623 /* fichiers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fichiers.c; sourceTree = "<group>"; };
+		C343F23B239FB57500F3E623 /* instructions.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instructions.jpg; sourceTree = "<group>"; };
+		C343F23C239FB57D00F3E623 /* instructions_jeu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instructions_jeu.jpg; sourceTree = "<group>"; };
+		C343F23D239FB8FF00F3E623 /* niveaux.lvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = niveaux.lvl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +85,11 @@
 			children = (
 				C343F22F239E5DC700F3E623 /* constantes.h */,
 				C343F218239C217100F3E623 /* main.c */,
-				C343F230239E642A00F3E623 /* jeu.c */,
 				C343F231239E642A00F3E623 /* jeu.h */,
-				C343F236239E698E00F3E623 /* fichiers.c */,
+				C343F230239E642A00F3E623 /* jeu.c */,
 				C343F234239E68F400F3E623 /* fichiers.h */,
-				C343F235239E697D00F3E623 /* niveaux.lvl */,
+				C343F236239E698E00F3E623 /* fichiers.c */,
+				C343F23D239FB8FF00F3E623 /* niveaux.lvl */,
 				C343F233239E643E00F3E623 /* images */,
 			);
 			path = jeu;
@@ -114,6 +116,8 @@
 				C343F229239D463000F3E623 /* menu.jpg */,
 				C343F22B239D463100F3E623 /* mur.jpg */,
 				C343F22A239D463000F3E623 /* objectif.png */,
+				C343F23C239FB57D00F3E623 /* instructions_jeu.jpg */,
+				C343F23B239FB57500F3E623 /* instructions.jpg */,
 			);
 			path = images;
 			sourceTree = "<group>";
